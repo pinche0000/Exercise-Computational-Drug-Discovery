@@ -53,7 +53,48 @@ ggplot(final_df, aes(x = Infection_Prevalence, y = Probability_To_Be_Infected, c
 
 
 
+p99 <- final_df|>
+  filter(Specificity == 0.99)|>
+  select(Probability_To_Be_Infected) |>
+  pull()
 
 
+p99.9 <- final_df|>
+  filter(Specificity == 0.999)|>
+  select(Probability_To_Be_Infected) |>
+  pull()
+
+
+
+t.test(p99, p99.9,var.equal = T)
+
+#significant difference
+
+p99.99 <- final_df|>
+  filter(Specificity == 0.9999)|>
+  select(Probability_To_Be_Infected) |>
+  pull()
+
+
+p99.999 <- final_df|>
+  filter(Specificity == 0.99999)|>
+  select(Probability_To_Be_Infected) |>
+  pull()
+
+
+
+
+t.test(p99, p99.99)
+
+#significant difference 
+t.test(p99, p99.999)
+
+#significant difference 
+
+t.test(p99.99, p99.999)
+
+#not significant difference 
+
+t.test(p99.9, p99.999)# significant 
 
 
